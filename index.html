@@ -23,19 +23,19 @@
 	add("Download: "+size+" MByte --&gt; ");
 	d=new Date();
 	start=d.getTime();
-        $.get("blob/"+size,function() { 
+        $.get("blob/"+size,function() {
 	    d=new Date();
 	    stop=d.getTime();
 	    time=stop-start;
 	    speed=(1000/time*size);
-	    add(time+" msec "+speed.toFixed(2)+" Mbyte/s <br>");
+	    add(time+" msec "+speed.toFixed(2)+" MByte/s <br>");
 	    if (time<=500 && repeat==0) { speedtest(size*2,0); }
 	    else {
 		download_sum_size+=size;
 		download_sum_time+=time;
-		if(repeat==4) { 
+		if(repeat==4) {
 		   $("#result").html("Download: "+download_sum_size+" MByte in "+download_sum_time/1000+" seconds : "+
-				     (download_sum_size/download_sum_time*1000*8).toFixed(2)+" MBit/s<br>"); 
+				     (download_sum_size/download_sum_time*1000*8).toFixed(2)+" Mbit/s<br>");
 		   speedtest_upload(0.1,0);
 		}
 		else speedtest(size,repeat+1);
@@ -58,22 +58,22 @@
 	var upload_data=blob;
 	for (var i=1;i<size;i++) upload_data+=blob;
 
-        $.ajax({ type: "POST", url: "blob/", contentType: 'application/octet-stream', 
+        $.ajax({ type: "POST", url: "blob/", contentType: 'application/octet-stream',
 	  	 data: upload_data, processData:false })
-	    .done(function(data) { 
+	    .done(function(data) {
 	        d=new Date();
 	        stop=d.getTime();
 	        time=stop-start;
 	        speed=(1000/time*size);
-	        add(time+" msec "+speed.toFixed(2)+" Mbyte/s <br>");
+	        add(time+" msec "+speed.toFixed(2)+" MByte/s <br>");
 	        if (time<=500 && repeat==0) { speedtest_upload(size*2,0); }
-	        else 
+	        else
 		{
 		    upload_sum_size+=size;
 		    upload_sum_time+=time;
-		    if(repeat==4) { 
+		    if(repeat==4) {
 		       $("#result").append("Upload: "+upload_sum_size+" MByte in "+upload_sum_time/1000+" seconds : "+
-				           (upload_sum_size/upload_sum_time*1000*8).toFixed(2)+" MBit/s<br>"); 
+				           (upload_sum_size/upload_sum_time*1000*8).toFixed(2)+" Mbit/s<br>");
 		    }
 		    else speedtest_upload(size,repeat+1);
 	        }
