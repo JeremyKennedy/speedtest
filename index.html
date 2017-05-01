@@ -22,23 +22,23 @@
 		var speed;
 		var time;
 		var d;
-		add("Download: " + size + " MByte --&gt; ");
+		add("Download " + size + " MB: ");
 		d = new Date();
 		start = d.getTime();
 		$.get("blob/" + size, function () {
 			d = new Date();
 			stop = d.getTime();
 			time = stop - start;
-			speed = (1000 / time * size);
-			add(time + " msec " + speed.toFixed(2) + " MByte/s <br>");
-			if (time <= 500 && repeat == 0) { speedtest(size * 2, 0); }
+			speed = (1024 / time * size);
+			add(time + " ms @ " + speed.toFixed(2) + " MB/s <br>");
+			if (time <= 1000 && repeat == 0) { speedtest(size * 2, 0); }
 			else {
 				download_sum_size += size;
 				download_sum_time += time;
 				if (repeat == 4) {
-					$("#result").html("Download: " + download_sum_size + " MByte in " + download_sum_time / 1000 + " seconds : " +
-						(download_sum_size / download_sum_time * 1000 * 8).toFixed(2) + " Mbit/s<br>");
-					speedtest_upload(0.1, 0);
+					$("#result").html("Download " + download_sum_size + " MB in " + (download_sum_time / 1024).toFixed(2) + " seconds: " +
+						(download_sum_size / download_sum_time * 1024).toFixed(2) + " MB/s <br>");
+					speedtest_upload(1, 0);
 				}
 				else speedtest(size, repeat + 1);
 			}
@@ -52,7 +52,7 @@
 		var speed;
 		var time;
 		var d;
-		add("Upload: " + size + " MByte --&gt; ");
+		add("Upload " + size + " MB: ");
 		d = new Date();
 		start = d.getTime();
 
@@ -67,15 +67,15 @@
 				d = new Date();
 				stop = d.getTime();
 				time = stop - start;
-				speed = (1000 / time * size);
-				add(time + " msec " + speed.toFixed(2) + " MByte/s <br>");
-				if (time <= 500 && repeat == 0) { speedtest_upload(size * 2, 0); }
+				speed = (1024 / time * size);
+				add(time + " ms @ " + speed.toFixed(2) + " MB/s <br>");
+				if (time <= 1000 && repeat == 0) { speedtest_upload(size * 2, 0); }
 				else {
 					upload_sum_size += size;
 					upload_sum_time += time;
 					if (repeat == 4) {
-						$("#result").append("Upload: " + upload_sum_size + " MByte in " + upload_sum_time / 1000 + " seconds : " +
-							(upload_sum_size / upload_sum_time * 1000 * 8).toFixed(2) + " Mbit/s<br>");
+						$("#result").append("Upload " + upload_sum_size + " MB in " + (upload_sum_time / 1024).toFixed(2) + " seconds: " +
+							(upload_sum_size / upload_sum_time * 1024).toFixed(2) + " MB/s <br>");
 					}
 					else speedtest_upload(size, repeat + 1);
 				}
