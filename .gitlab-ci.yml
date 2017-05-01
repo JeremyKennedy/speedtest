@@ -1,0 +1,10 @@
+build_image:
+  image: docker:git
+  services:
+  - docker:dind
+  script:
+    - docker login -u B6_r23mXydMxqVDmusZu -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/jeremykennedy/speedtest/image .
+    - docker push registry.gitlab.com/jeremykennedy/speedtest/image
+  only:
+    - master
