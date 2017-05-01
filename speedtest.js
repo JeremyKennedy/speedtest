@@ -42,12 +42,12 @@ fs.open("/dev/urandom", "r", function(err, fd) {
 });
 
 var listen = "0.0.0.0";
-var port = "8081";
+var port = "80";
 
 opt = require("node-getopt")
   .create([
     ["l", "bindaddress=ARG", "Listen to this IP (any)"],
-    ["p", "port=ARG", "Listen to this TCP Port (8081)"],
+    ["p", "port=ARG", "Listen to this TCP Port (80)"],
     ["h", "help", "display this help"]
   ])
   .bindHelp()
